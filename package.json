@@ -1,0 +1,29 @@
+{
+  "name": "alog-datasource",
+  "version": "1.0.0",
+  "description": "ALog datasource for Grafana",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "amiya",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "7.0.1",
+    "@grafana/toolkit": "7.0.1",
+    "@grafana/ui": "7.0.1",
+    "@testing-library/jest-dom": "5.4.0",
+    "@testing-library/react": "^10.2.1",
+    "@types/lodash": "^4.14.155"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  },
+  "dependencies": {
+    "@grafana/runtime": "^7.0.3",
+    "@types/angular": "^1.7.0",
+    "angular": "^1.8.0"
+  }
+}

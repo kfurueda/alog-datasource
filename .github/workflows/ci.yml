@@ -1,0 +1,50 @@
+name: CI
+on:
+  - push
+  - pull_request
+jobs:
+  ci:
+    name: Node.js ${{ matrix.node-version }} on ${{ matrix.runs-on }}
+    strategy:
+      fail-fast: false
+      matrix:
+        runs-on:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - macos-latest
+          - windows-latest
+        node-version:
+          - 12
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ matrix.runs-on }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: |
+          yarnpkg install --frozen-lockfile
+      - name: Build
+        run: |
+          ./node_modules/.bin/grafana-toolkit plugin:ci-build
+      - name: Keep build results
+        run: |
+          ./node_modules/.bin/grafana-toolkit plugin:ci-build --finish
+      - name: Package
+        if: |
+          startsWith(matrix.runs-on, 'ubuntu-')
+        run: |
+          GRABPL_VERSION=0.5.0
+          wget https://grafana-downloads.storage.googleapis.com/grafana-build-pipeline/v${GRABPL_VERSION}/grabpl
+          chmod +x grabpl
+          sudo mv grabpl /usr/local/bin/
+          ./node_modules/.bin/grafana-toolkit plugin:ci-package
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.runs-on }}-nodejs-${{ matrix.node-version }}
+          path: ci
