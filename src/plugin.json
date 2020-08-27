@@ -8,7 +8,7 @@
     "description": "ALog datasource",
     "author": {
       "name": "Amiya",
-      "url": "https://github.com/groonga/grafana-datasource-plugin-groonga"
+      "url": "https://github.com/kfurueda/alog-datasource"
     },
     "keywords": [
       "Groonga",
@@ -21,11 +21,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/groonga/grafana-datasource-plugin-groonga"
+        "url": "https://github.com/kfurueda/alog-datasource"
       },
       {
         "name": "License",
-        "url": "https://github.com/groonga/grafana-datasource-plugin-groonga/blob/master/LICENSE"
+        "url": "https://github.com/kfurueda/alog-datasource/blob/master/LICENSE"
       }
     ],
     "screenshots": [],
